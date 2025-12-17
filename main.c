@@ -1,18 +1,25 @@
-#include "chip8.c"
-#include ".\include\raylib.h"
+#include <stdio.h>
+#include "chip8.h"
+#include "raylib.h"
 
 #define SCALE 10
 
 int main() {
-    FILE* f = fopen("1-chip8-logo.ch8", "rb");
+    char *filename = "3-corax+.ch8";
+    FILE* f = fopen(filename, "rb");
+    if (!f) {
+        printf("%s: no such file\n", filename);
+        return 0;
+    }
+
     fpos_t fSize;
     fseek(f, 0, SEEK_END);
     fgetpos(f, &fSize);
     rewind(f);
     chip8* ch8 = chip8_init();
-    fread(&ch8->memory[ch8->PC], 1, fSize, f);
+    fread(&ch8->memory[ch8->PC], 1, fSize.__pos, f);
 
-    InitWindow(WIDTH*SCALE, HEIGHT*SCALE, "raylib [core] example - basic window");
+    InitWindow(WIDTH*SCALE, HEIGHT*SCALE, "Chip 8");
     while (!WindowShouldClose())
     {
         opcode(ch8);

@@ -1,17 +1,17 @@
-test: main.o
-	gcc -o main main.o -g -I include -L lib -lraylib -lgdi32 -lwinmm
-	make clear
+CFLAGS=-g
+SRCS=$(wildcard *.c)
+OBJS=$(SRCS:.c=.o)
+LDFLAGS=-lraylib -lm -lpthread -ldl -lrt -lX11  -g
 
-main: main.o
-	gcc -o main main.o -I include -L lib -lraylib -lgdi32 -lwinmm
-	make clear
+test: chip8
+	./chip8
 
-main.o: main.c chip8.c chip8.h
-	gcc -c main.c chip8.c
+chip8: $(OBJS)
+	$(CC) $(CFLAGS) -o chip8  $(OBJS) $(LDFLAGS)
 
-clear: 
-	del *.o
+$(OBJS): chip8.h
 
-run:
-	make main
-	./main
+clean: 
+	rm -f chip8 *.o 
+
+.PHONY: test clean

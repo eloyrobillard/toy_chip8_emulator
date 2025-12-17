@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
-
 #ifndef CHIP8_H
 #define CHIP8_H
+
+#include <stdlib.h>
+#include <inttypes.h>
 
 #define WIDTH 64
 #define HEIGHT 32
