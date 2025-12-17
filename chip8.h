@@ -13,7 +13,7 @@ typedef struct chip8 {
     //The Chip-8 supports 36 2-bytes long Chip-8 opcodes
     uint16_t opcode;
 
-    //Chip-8 can hold a whopping 4 kilobytes of memory
+    //Chip-8 can hold a whopping 4 kilobytes of memory :D
     uint8_t memory[4096];
 
     // General-purpose V registers, VF is instruction-only
